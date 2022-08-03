@@ -1,0 +1,4 @@
+[submodule "plonky2"]
+	path = plonky2
+	url = https://github.com/proxima-one/plonky2.git
+	branch = "merkle-stark"

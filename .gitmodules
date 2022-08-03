@@ -5,3 +5,8 @@
 [submodule "circomlib"]
 	path = circomlib
 	url = https://github.com/Sladuca/circomlib
+[submodule "halo2"]
+	path = halo2
+	url = https://github.com/Sladuca/halo2.git
+	branch = "bench-sha256-x16"
+

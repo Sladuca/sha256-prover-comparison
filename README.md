@@ -12,7 +12,7 @@ For Groth16, I wrote a circuit [`sha256_2_x16`](todo) which instantiates 15 inst
 
 For Plonky2, we're using the sha256 compression STARK that I wrote, which can be found [here](https://github.com/proxima-one/plonky2/tree/merkle-stark/merkle-stark/src/sha256_stark)
 
-For Halo2, I took their existing sha256 benchmark and modified the circuit used so that it instantiates 15 instances of their `Table16` chip.
+For Halo2, I took their existing sha256 benchmark and modified the circuit used so that it uses the compression function instead of the full hash and invokes it 15 times.
 
 ## Running the benchmarks
 

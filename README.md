@@ -50,6 +50,8 @@ Starky and and halo2 are both in rust, so I used criterion for both. For Groth16
 
 There's probably tons of measurement error in the Groth16 benchmark since I'm including the time it takes node to fork a new process and run the snarkyjs cli in a shell.
 
-I'm completely ignoring compilation / setup costs since the STARK doesn't have a "circuit" to compile. The benchmarker I wrote for groth16 prints times for compilation / setup too.
+This completely ignores compilation / setup costs since the STARK doesn't have a "circuit" to compile. The benchmarker I wrote for groth16 prints times for compilation / setup too.
+
+This also completely ignores proof size, as for the most part nobody cares since 100K isn't actually that large in outside the EVM - it's smaller than many webpages. And if you're verifying in EVM, as long as you have a decent verifier circuit you can always wrap it in a groth16 proof just before submitting to L1.
 
 When running the benchmark with different number of hashes, the comparison changes. For instance, on my machine, starky does around ~88 hashes/sec for 63 and around ~84 hashes/sec for 31.

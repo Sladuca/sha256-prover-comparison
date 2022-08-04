@@ -32,13 +32,15 @@ TODO
 
 ## The Results
 
-On my 2019 Mac Book Pro...
+On my 2019 Mac Book Pro I get the following results for proving 15 invocations of the sha256 compression function:
 
 | proof system           | proving time | hashes/sec |
 |------------------------|--------------|------------|
 | starky (plonky2 STARK) | 186.25ms     | 80.53      |
 | halo2                  | 51.095s      | 0.29       |
 | groth16                | 14.447s      | 1.03       |
+
+Here, starky is ~274x faster than halo2 and ~77x faster than groth16.
 
 Don't go off of my numbers, run them yourself.
 
@@ -47,3 +49,7 @@ Don't go off of my numbers, run them yourself.
 Starky and and halo2 are both in rust, so I used criterion for both. For Groth16 it's all JS. After around 10 minutes of looking I couldn't find a good benchmarking suite for circom, so I wrote a very crude thing that runs the prover 10 times and takes the average. If such a tool exists, feel free to rewrite the circom benchmark using it.
 
 There's probably tons of measurement error in the Groth16 benchmark since I'm including the time it takes node to fork a new process and run the snarkyjs cli in a shell.
+
+I'm completely ignoring compilation / setup costs since the STARK doesn't have a "circuit" to compile. The benchmarker I wrote for groth16 prints times for compilation / setup too.
+
+When running the benchmark with different number of hashes, the comparison changes. For instance, on my machine, starky does around ~88 hashes/sec for 63 and around ~84 hashes/sec for 31.

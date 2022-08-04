@@ -31,7 +31,7 @@ On my 2019 Mac Book Pro I get the following results for proving 15 invocations o
 | proof system           | proving time | hashes/sec |
 |------------------------|--------------|------------|
 | starky (plonky2 STARK) | 186.25ms     | 80.53      |
-| halo2                  | 51.095s      | 0.29       |
+| halo2                  | 54.719s      | 0.27       |
 | groth16                | 14.447s      | 1.03       |
 
 Here, starky is ~274x faster than halo2 and ~77x faster than groth16.

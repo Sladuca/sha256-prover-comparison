@@ -16,7 +16,7 @@ For Halo2, I took their existing sha256 benchmark and modified the circuit used 
 
 ## Running the benchmarks
 
-Dependencies: node, rust, circom, snarkjs
+Dependencies: node, rust, circom, snarkjs. See installation instructions for circom and snarkjs [here](https://docs.circom.io/getting-started/installation/)
 
 1. pull submodules: `git submodule init && git submodule update`
 2. run the corresponding script for the benchmark you'd like to run:

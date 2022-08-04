@@ -19,20 +19,10 @@ For Halo2, I took their existing sha256 benchmark and modified the circuit used 
 Dependencies: node, rust, circom, snarkjs
 
 1. pull submodules: `git submodule init && git submodule update`
-2. run any of the following:
-  * starky: ``
-
-### Starky
-
-
-
-### Halo2
-
-TODO
-
-### Groth16
-
-TODO
+2. run the corresponding script for the benchmark you'd like to run:
+  * starky: `./run_starky.sh`
+  * halo2: `./run_halo2.sh`
+  * groth16: `./run_groth16.sh`
 
 ## The Results
 

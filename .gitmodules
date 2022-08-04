@@ -5,6 +5,7 @@
 [submodule "circomlib"]
 	path = circomlib
 	url = https://github.com/Sladuca/circomlib
+	branch = "sha2x16-test"
 [submodule "halo2"]
 	path = halo2
 	url = https://github.com/Sladuca/halo2.git

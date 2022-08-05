@@ -1,8 +1,8 @@
 # sha256 prover comparison
 
-Recently I wrote a sha256 compression STARK using [plonky2](https://github.com/mir-protocol/plonky2) that is pretty fast. This repo contains benchmarks running roughly the same thing in groth16, halo2, and maybe more in the future (feel free to add your favorite).
+Recently I wrote a sha256 compression STARK using [plonky2](https://github.com/mir-protocol/plonky2) that is pretty fast. This repo contains benchmarks running roughly the same thing in groth16, halo2, and maybe more in the future (feel free to add your favorite & open a PR).
 
-In no way do I guarantee these benchmarks are representative. This should only be taken as a rough ballbark comparison between the proof systems.
+This shouldn't be considered a comprehensive benchmark, but rather a way to get a ballpark comparison between the proof systems.
 
 ## The Benchmark
 
@@ -55,10 +55,16 @@ Don't go off of our numbers, run them yourself.
 
 Starky and and halo2 are both in rust, so I used criterion for both. For Groth16 it's all JS. After around 10 minutes of looking I couldn't find a good benchmarking suite for circom, so I wrote a very crude thing that runs the prover 10 times and takes the average. If such a tool exists, feel free to rewrite the circom benchmark using it.
 
-There's probably tons of measurement error in the Groth16 benchmark since I'm including the time it takes node to fork a new process and run the snarkyjs cli in a shell. We're also using the snarkyjs CLI to run the prover here, which doesn't seem to be well-optimized from an implementation standpoint.
+There's probably tons of measurement error in the Groth16 benchmark since we're including the time it takes node to fork a new process and run the snarkyjs cli in a shell. We're also using the snarkyjs CLI to run the prover here, which doesn't seem to be well-optimized from an implementation standpoint.
 
 This completely ignores compilation / setup costs since the STARK doesn't have a "circuit" to compile. The benchmarker I wrote for groth16 prints times for compilation / setup too.
 
 This also completely ignores proof size, as for the most part nobody cares since 100K isn't actually that large outside the EVM - it's smaller than many webpages. And if you're verifying in EVM, as long as you have a decent verifier circuit you can always wrap it in a groth16 proof just before submitting to L1.
 
 When running the benchmark with different number of hashes, the comparison changes. For instance, on my machine, starky does around ~88 hashes/sec for 63 and around ~84 hashes/sec for 31.
+
+## Proof systems that would be cool to add
+
+- plonky2 SNARK
+- vanilla PLONK
+- Marlin

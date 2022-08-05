@@ -8,7 +8,7 @@ In no way do I guarantee these benchmarks are representative. This should only b
 
 Since we're comparing SNARKs and STARKs, we're going to benchmark the time it takes to prove a circuit that performs 15 unrelated invocations of the sha2 compression function. That is, sha256, minus the padding step at the beginning. Why 15? Because that's the number of hashes required to build a depth-5 merkle tree given 16 hashes, which is the use case that motivated me to write the plonky2 STARK in the first place. Feel free to change the number of hashes and run the benchmarks however you like.
 
-For Groth16, I wrote a circuit [`sha256_2_x16`](https://github.com/Sladuca/circomlib/blob/sha2x16-test/circuits/sha256/sha256_2_x15.circom) which instantiates 15 instances of the standard `circomlib` circuit `sha256_2`, which does exactly what we want.
+For Groth16, I wrote a circuit [`sha256_2_x16`](https://github.com/Sladuca/circomlib/blob/sha2x16-test/circuits/sha256/sha256_2_x15.circom) which instantiates 15 instances of the standard `circomlib` circuit `sha256_2`, which does exactly what we want. I'm using the snarkyjs prove CLI to run the prover.
 
 For Plonky2, we're using the sha256 compression STARK that I wrote, which can be found [here](https://github.com/proxima-one/plonky2/tree/merkle-stark/merkle-stark/src/sha256_stark)
 
@@ -39,13 +39,23 @@ On my 2019 MacBook Pro I get the following results for proving 15 invocations of
 
 Here, starky is ~38x faster than halo2 and ~77x faster than groth16.
 
-Don't go off of my numbers, run them yourself.
+My friend [@username](https://www.github.com/sigmachirality) ran them on his 2021 MacBook Pro with an M1 processor and got the following results. He also deserves thanks for cleaning up the groth16 runner script:
+
+| proof system           | proving time | hashes/sec |
+|------------------------|--------------|------------|
+| starky (plonky2 STARK) | 104.99 ms    | 142.1      |
+| halo2                  | 4.1842s      | 3.58       |
+| groth16                | 11.589s      | 1.29       |
+
+Here, starky is ~40x faster than halo2 and ~110x faster than groth16.
+
+Don't go off of our numbers, run them yourself.
 
 ## Notes
 
 Starky and and halo2 are both in rust, so I used criterion for both. For Groth16 it's all JS. After around 10 minutes of looking I couldn't find a good benchmarking suite for circom, so I wrote a very crude thing that runs the prover 10 times and takes the average. If such a tool exists, feel free to rewrite the circom benchmark using it.
 
-There's probably tons of measurement error in the Groth16 benchmark since I'm including the time it takes node to fork a new process and run the snarkyjs cli in a shell.
+There's probably tons of measurement error in the Groth16 benchmark since I'm including the time it takes node to fork a new process and run the snarkyjs cli in a shell. We're also using the snarkyjs CLI to run the prover here, which doesn't seem to be well-optimized from an implementation standpoint.
 
 This completely ignores compilation / setup costs since the STARK doesn't have a "circuit" to compile. The benchmarker I wrote for groth16 prints times for compilation / setup too.
 

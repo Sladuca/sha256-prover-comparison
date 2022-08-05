@@ -25,7 +25,7 @@ Dependencies:
 2. run the corresponding script for the benchmark you'd like to run:
   * starky: `./run_starky.sh`
   * halo2: `./run_halo2.sh`
-  * groth16: `./run_groth16.sh`. Be warned that the first time around this takes a really long time (~1.5 hours) because of the trusted setup.
+  * groth16: `./run_groth16.sh`. Be warned that the first time around this takes a really long time (~1.5 hours) because of the trusted setup. Any subsequent runs (as long as the `output` directory isn't missing) will re-use the result.
 
 ## The Results
 

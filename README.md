@@ -8,7 +8,7 @@ In no way do I guarantee these benchmarks are representative. This should only b
 
 Since we're comparing SNARKs and STARKs, we're going to benchmark the time it takes to prove a circuit that performs 15 unrelated invocations of the sha2 compression function. That is, sha256, minus the padding step at the beginning. Why 15? Because that's the number of hashes required to build a depth-5 merkle tree given 16 hashes, which is the use case that motivated me to write the plonky2 STARK in the first place. Feel free to change the number of hashes and run the benchmarks however you like.
 
-For Groth16, I wrote a circuit [`sha256_2_x16`](todo) which instantiates 15 instances of the standard `circomlib` circuit `sha256_2`, which does exactly what we want.
+For Groth16, I wrote a circuit [`sha256_2_x16`](https://github.com/Sladuca/circomlib/blob/sha2x16-test/circuits/sha256/sha256_2_x15.circom) which instantiates 15 instances of the standard `circomlib` circuit `sha256_2`, which does exactly what we want.
 
 For Plonky2, we're using the sha256 compression STARK that I wrote, which can be found [here](https://github.com/proxima-one/plonky2/tree/merkle-stark/merkle-stark/src/sha256_stark)
 
@@ -29,7 +29,7 @@ Dependencies:
 
 ## The Results
 
-On my 2019 Mac Book Pro I get the following results for proving 15 invocations of the sha256 compression function:
+On my 2019 MacBook Pro I get the following results for proving 15 invocations of the sha256 compression function:
 
 | proof system           | proving time | hashes/sec |
 |------------------------|--------------|------------|

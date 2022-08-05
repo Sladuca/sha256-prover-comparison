@@ -20,6 +20,7 @@ Dependencies:
 - node
 - rust (with nightly, install that with `rustup install nightly`)
 - circom & snarkjs. See installation instructions for circom and snarkjs [here](https://docs.circom.io/getting-started/installation/). 
+- git lfs (to save you the trouble of running the groth16 trusted setup, you can install it with brew)
 
 1. pull submodules: `git submodule init && git submodule update`
 2. run the corresponding script for the benchmark you'd like to run:

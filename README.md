@@ -39,7 +39,7 @@ On my 2019 MacBook Pro I get the following results for proving 15 invocations of
 
 Here, starky is ~38x faster than halo2 and ~77x faster than groth16.
 
-My friend [@username](https://www.github.com/sigmachirality) ran them on his 2021 MacBook Pro with an M1 processor and got the following results. He also deserves thanks for cleaning up the groth16 runner script:
+My friend [@sigmachirality](https://www.github.com/sigmachirality) ran them on his 2021 MacBook Pro with an M1 processor and got the following results. He also deserves thanks for cleaning up the groth16 runner script:
 
 | proof system           | proving time | hashes/sec |
 |------------------------|--------------|------------|

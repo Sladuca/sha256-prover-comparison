@@ -8,7 +8,7 @@ This shouldn't be considered a comprehensive benchmark, but rather a way to get 
 
 Since we're comparing SNARKs and STARKs, we're going to benchmark the time it takes to prove a circuit that performs 15 unrelated invocations of the sha2 compression function. That is, sha256, minus the padding step at the beginning. Why 15? Because that's the number of hashes required to build a depth-5 merkle tree given 16 hashes, which is the use case that motivated me to write the plonky2 STARK in the first place. Feel free to change the number of hashes and run the benchmarks however you like.
 
-For Groth16, I wrote a circuit [`sha256_2_x15`](https://github.com/Sladuca/circomlib/blob/sha2x16-test/circuits/sha256/sha256_2_x15.circom) which instantiates 15 instances of the standard `circomlib` circuit `sha256_2`, which does exactly what we want. I'm using the snarkyjs prove CLI to run the prover.
+For Groth16, I wrote a circuit [`sha256_2_x15`](https://github.com/Sladuca/circomlib/blob/sha2x16-test/circuits/sha256/sha256_2_x15.circom) which instantiates 15 instances of the compression function circuit. I'm using the snarkyjs prove CLI to run the prover.
 
 For Plonky2, we're using the sha256 compression STARK that I wrote, which can be found [here](https://github.com/proxima-one/plonky2/tree/merkle-stark/merkle-stark/src/sha256_stark)
 
@@ -35,19 +35,19 @@ On my 2019 MacBook Pro I get the following results for proving 15 invocations of
 |------------------------|--------------|------------|
 | starky (plonky2 STARK) | 186.25ms     | 80.5       |
 | halo2                  | 7.1850s      | 2.08       |
-| groth16                | 14.447s      | 1.03       |
+| groth16                | 12.200s      | 1.23       |
 
-Here, starky is ~38x faster than halo2 and ~77x faster than groth16.
+Here, starky is ~38x faster than halo2 and ~65x faster than groth16.
 
 My friend [@sigmachirality](https://www.github.com/sigmachirality) ran them on his 2021 MacBook Pro with an M1 processor and got the following results. He also deserves thanks for cleaning up the groth16 runner script:
 
 | proof system           | proving time | hashes/sec |
 |------------------------|--------------|------------|
-| starky (plonky2 STARK) | 104.99ms    | 142.1      |
+| starky (plonky2 STARK) | 104.99ms     | 142.1      |
 | halo2                  | 4.1842s      | 3.58       |
-| groth16                | 11.589s      | 1.29       |
+| groth16                | 11.133s      | 1.34       |
 
-Here, starky is ~40x faster than halo2 and ~110x faster than groth16.
+Here, starky is ~40x faster than halo2 and ~106x faster than groth16.
 
 Don't go off of our numbers, run them yourself.
 

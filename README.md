@@ -45,9 +45,9 @@ My friend [@sigmachirality](https://www.github.com/sigmachirality) ran them on h
 |------------------------|--------------|------------|
 | starky (plonky2 STARK) | 104.99ms     | 142.1      |
 | halo2                  | 4.1842s      | 3.58       |
-| groth16                | 11.133s      | 1.34       |
+| groth16                | 10.338s      | 1.45       |
 
-Here, starky is ~40x faster than halo2 and ~106x faster than groth16.
+Here, starky is ~40x faster than halo2 and ~98x faster than groth16.
 
 Don't go off of our numbers, run them yourself.
 
